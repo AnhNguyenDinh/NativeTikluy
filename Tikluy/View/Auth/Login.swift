@@ -11,7 +11,12 @@ let screenHeight = UIScreen.main.bounds.height
 
 let widthLogo = screenWidth * 0.3
 let heightLogo =  widthLogo / 1.16
+
 struct Login: View {
+    @State private var username: String = ""
+    @State private var password: String = ""
+  
+    
     var body: some View {
         GeometryReader{geometry in
             let safeAreaTop = geometry.safeAreaInsets.top
@@ -23,14 +28,18 @@ struct Login: View {
                             .resizable()
                             .frame(width: widthLogo, height:heightLogo)
                         Spacer().frame(height:40)
-                        TextField("Số điện thoại", text: .constant(""))
+                        TextField("Số điện thoại", text: $username)
                             .padding(.vertical,0)
+                            .onChange(of: username) { oldValue, newValue in
+                                print("\(oldValue)- \(newValue)")
+                            }
+                            
                         Rectangle() // Đây là viền dưới
                                        .fill(Color.gray)
                                        .frame(height: 1)
                         Spacer().frame(height:40)
-                        SecureField("Mật khẩu",text: .constant(""))
-//
+                        SecureField("Mật khẩu",text: $password)
+                 
         
                         
                     }
@@ -50,9 +59,17 @@ struct Login: View {
             )
             .ignoresSafeArea(.all)
         }
+        .onAppear {
+            username = "0357628024"
+            password = "Admin123@"
+        }
+        
     
     }
+        
 }
+
+
 
 #Preview {
     Login()
