@@ -58,11 +58,15 @@ struct ProcedureRegister: View {
                 Text("ĐIỀU KIỆN & ĐIỀU KHOẢN")
                     .font(.system(size: 20, weight: .bold)).foregroundStyle(.red)
                 Spacer().frame(height:20)
-                CheckboxView(isChecked: $isChecked)
+                ConditionAndPrivacyView(isChecked: $isChecked)
                 Spacer().frame(height:20)
                 Button {
-    //                navigateRegister.toggle()
-                    // Forgot password action
+                    guard isChecked else {
+                        print("Chưa check điều khoản và thông báo cho user và vui lòng đọc và chấp thận với quy định về sử dụng sản phẩm TIKLUY")
+                        return
+                    }
+                    print("Đã check, đi qua màn khác")
+
                 } label: {
                     Text("TIẾP TỤC")
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -78,12 +82,12 @@ struct ProcedureRegister: View {
         }
         .navigationBarHidden(true)
         .padding(.horizontal, 20)
-        
     }
 }
 
 
     struct renderStep : View {
+        
         var step : String
         var decription : String
         var isShowNextStep : Bool = true
