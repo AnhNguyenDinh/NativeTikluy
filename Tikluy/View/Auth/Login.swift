@@ -9,7 +9,7 @@ let heightLogo = widthLogo / 4
 struct Login: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var isLogin: Bool = false
+    @State private var isLogin: Bool = true
     @State private var navigateRegister : Bool = false
     
     
@@ -121,7 +121,8 @@ private extension Login {
         }
         .padding(.all, 20)
         .padding(.top, isLogin ? 40 : 20)
-        .background(Color.white.opacity(0.2))
+        .background(.ultraThinMaterial)
+//        .background(Color.white.opacity(0.2))
         .cornerRadius(20)
         .padding(.horizontal, 20)
     }
