@@ -20,7 +20,7 @@ struct LoadingScreen: View {
             }
             .frame(maxWidth: .infinity,  maxHeight: .infinity )
             .background(
-                Image("bg_new_home")
+                Image("bg_login")
                     .resizable(resizingMode: .stretch)
                     .scaledToFill()
             )

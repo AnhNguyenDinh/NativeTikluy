@@ -1,9 +1,6 @@
 import SwiftUI
 
-let screenWidth = UIScreen.main.bounds.width
-let screenHeight = UIScreen.main.bounds.height
-
-let widthLogo = screenWidth * 0.5
+let widthLogo = ScreenWidth * 0.5
 let heightLogo = widthLogo / 4
 
 struct Login: View {
@@ -14,12 +11,12 @@ struct Login: View {
     
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GeometryReader { geometry in
                 let safeAreaTop = geometry.safeAreaInsets.top
                 ZStack {
                     ScrollView {
-                        Spacer().frame(height: screenWidth * 0.2)
+                        Spacer().frame(height: ScreenWidth * 0.2)
                         headerLogo
                         
                         Spacer().frame(height: isLogin ? 100 : 40)
@@ -33,7 +30,7 @@ struct Login: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
-                    Image("bg_new_home")
+                    Image("bg_login")
                         .resizable(resizingMode: .stretch)
                         .scaledToFill()
                 )
@@ -69,13 +66,13 @@ private extension Login {
                             .stroke(Color.red, lineWidth: 2)
                         
                     )
-                    .position(x: screenWidth / 2, y: 0)
+                    .position(x: ScreenWidth / 2, y: 0)
             } placeholder: {
                 ProgressView()
                         .frame(width: 100, height: 100)
                         .background(.white)
                         .cornerRadius(50)
-                        .position(x: screenWidth / 2, y: 0)
+                        .position(x: ScreenWidth / 2, y: 0)
                 
             }
                 Button {
@@ -84,7 +81,7 @@ private extension Login {
                     Text("<").frame(width: 40, height: 40).font(.system(size: 20, weight: .bold)).foregroundStyle(.red).background(.white).cornerRadius(20)
                                               
                 }
-                .position(x: screenWidth / 2 - 80, y: -0)
+                .position(x: ScreenWidth / 2 - 80, y: -0)
 
                 
         }

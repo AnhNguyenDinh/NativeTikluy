@@ -14,7 +14,7 @@ struct HeaderLogoFull<RightContent: View>: View {
             Image("logo_full")
                 .resizable()
                 .frame(width: widthLogo, height: heightLogo)
-                .position(x: screenWidth / 2, y: heightLogo / 2)
+                .position(x: ScreenWidth / 2, y: heightLogo / 2)
 
             // Nút back và view phải
             HStack {
