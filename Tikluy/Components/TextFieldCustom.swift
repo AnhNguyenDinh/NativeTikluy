@@ -25,7 +25,7 @@ struct TextFieldCustom: View {
                 
                 HStack {
                     if let icon = icon {
-                        Image(icon)
+                        Image(systemName:icon)
                             .frame(width: 30, height: 30, alignment: Alignment.center)
 //                            .foregroundColor(.gray)
                     }

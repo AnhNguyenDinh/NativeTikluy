@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct ComponentTestView: View {
-    @State private var date: Date = Date()
+    @State var date: Date = Date()
     var body: some View {
         TabView{
-            HomeView()
+            HomeView(color: .constant(.red))
+                .tabItem {
+                    Image(systemName: "phone")
+                    Text("Home")
+                }
+            HomeView(color: .constant(.blue))
                 .tabItem {
                     Image(systemName: "house")
                     Text("Home")
                 }
-            Text("Hello, World!")
+            HomeView(color: .constant(.green))
                 .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
-                }
-            Text("Hello, World!")
-                .tabItem {
-                    Image(systemName: "house")
+                    Image(systemName: "lock")
                     Text("Home")
                 }
         }
-        .accentColor(.green)
+//        .frame(width: 300, height: 400)
+        .tabViewStyle(.automatic)
+        .accentColor(.red)
     }
 }
 
@@ -36,8 +38,19 @@ struct ComponentTestView: View {
 }
 
 struct HomeView: View {
+    @Binding  var color: Color
     var body: some View {
-        Text("Hello, World!")
-           
+        ZStack{
+            
+            color.ignoresSafeArea(edges:.top)
+                .onAppear {
+                    print("onAppear 1")
+                }
+            Text("Hello, World!")
+                .onAppear {
+                    print("onAppear 2")
+                }
+        }
+        
     }
 }

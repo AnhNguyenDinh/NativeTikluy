@@ -8,7 +8,7 @@ struct Login: View {
     @State private var password: String = ""
     @State private var isLogin: Bool = true
     @State private var navigateRegister : Bool = false
-    
+
     
     var body: some View {
         NavigationStack {
@@ -78,7 +78,13 @@ private extension Login {
                 Button {
                     isLogin.toggle()
                 } label: {
-                    Text("<").frame(width: 40, height: 40).font(.system(size: 20, weight: .bold)).foregroundStyle(.red).background(.white).cornerRadius(20)
+                    
+                    Image(systemName: "chevron.left")
+                        .frame(width: 40, height: 40)
+                        .font(.system(size: 18, weight: .semibold))
+                        .background(.white)
+                        .cornerRadius(20)
+                        .foregroundStyle(.red)
                                               
                 }
                 .position(x: ScreenWidth / 2 - 80, y: -0)
@@ -102,7 +108,7 @@ private extension Login {
                 Spacer().frame(height: 20)
             }
             
-            TextFieldCustom(label: "Mật khẩu", placeholder: "", text: $password, icon: "password", isSecure: true)
+            TextFieldCustom(label: "Mật khẩu", placeholder: "", text: $password, icon: "lock", isSecure: true)
             Spacer().frame(height: 20)
             
             forgotPasswordButton
@@ -159,9 +165,13 @@ private extension Login {
         Button {
             // Face ID action
         } label: {
-            Image("face_id")
-                .resizable()
-                .frame(width: 80, height: 80)
+            Image(systemName: "faceid")
+                .frame(width: 60, height: 60)
+                .font(.system(size: 32, weight: .semibold))
+                .background(.red)
+                .cornerRadius(12)
+                .foregroundStyle(.white)
+                
         }
     }
     
