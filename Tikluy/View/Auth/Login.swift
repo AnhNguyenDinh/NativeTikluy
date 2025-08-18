@@ -8,8 +8,11 @@ struct Login: View {
     @State private var password: String = ""
     @State private var isLogin: Bool = true
     @State private var navigateRegister : Bool = false
-
-    
+    @State private var isLoginSuccess : Bool = false
+    @State private var isShowWarning : Bool = false
+    @State private var warningText : String = ""
+    @State private var isShowPassWord : Bool = false
+    @State private var isSecure : Bool = false
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -27,6 +30,7 @@ struct Login: View {
                         }
                         .padding(.top, safeAreaTop)
                     }
+                    ModalFullView(isPresented: $isShowWarning,description: warningText)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
@@ -69,30 +73,30 @@ private extension Login {
                     .position(x: ScreenWidth / 2, y: 0)
             } placeholder: {
                 ProgressView()
-                        .frame(width: 100, height: 100)
-                        .background(.white)
-                        .cornerRadius(50)
-                        .position(x: ScreenWidth / 2, y: 0)
+                    .frame(width: 100, height: 100)
+                    .background(.white)
+                    .cornerRadius(50)
+                    .position(x: ScreenWidth / 2, y: 0)
                 
             }
-                Button {
-                    isLogin.toggle()
-                } label: {
-                    
-                    Image(systemName: "chevron.left")
-                        .frame(width: 40, height: 40)
-                        .font(.system(size: 18, weight: .semibold))
-                        .background(.white)
-                        .cornerRadius(20)
-                        .foregroundStyle(.red)
-                                              
-                }
-                .position(x: ScreenWidth / 2 - 80, y: -0)
-
+            Button {
+                isLogin.toggle()
+            } label: {
                 
+                Image(systemName: "chevron.left")
+                    .frame(width: 40, height: 40)
+                    .font(.system(size: 18, weight: .semibold))
+                    .background(.white)
+                    .cornerRadius(20)
+                    .foregroundStyle(.red)
+                
+            }
+            .position(x: ScreenWidth / 2 - 80, y: -0)
+            
+            
         }
         .zIndex(1)
-      
+        
     }
     
     var formSection: some View {
@@ -108,7 +112,15 @@ private extension Login {
                 Spacer().frame(height: 20)
             }
             
-            TextFieldCustom(label: "Mật khẩu", placeholder: "", text: $password, icon: "lock", isSecure: true)
+            TextFieldCustom(label: "Mật khẩu", placeholder: "", text: $password, icon: "lock", isSecure: isShowPassWord){
+                Button {
+                    isShowPassWord.toggle()
+                } label:{
+                    Image(systemName: isShowPassWord ?   "eye.fill" : "eye.slash.fill" )
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(.black)
+                }
+            }
             Spacer().frame(height: 20)
             
             forgotPasswordButton
@@ -125,7 +137,7 @@ private extension Login {
         .padding(.all, 20)
         .padding(.top, isLogin ? 40 : 20)
         .background(.ultraThinMaterial)
-//        .background(Color.white.opacity(0.2))
+        //        .background(Color.white.opacity(0.2))
         .cornerRadius(20)
         .padding(.horizontal, 20)
     }
@@ -134,7 +146,7 @@ private extension Login {
         HStack {
             Spacer()
             Button {
-//                navigateRegister.toggle()
+                //                navigateRegister.toggle()
                 // Forgot password action
             } label: {
                 Text("Quên mật khẩu?")
@@ -147,8 +159,15 @@ private extension Login {
     }
     
     var loginButton: some View {
+        
         Button {
-            print("Đăng nhập \(username) \(password)")
+            if username == "0357628024" || password == "123456" {
+                print("Đăng nhập \(username) \(password)")
+            }
+            else{
+                warningText = "Sai tài khoản hoặc mật khẩu"
+                isShowWarning.toggle()
+            }
         } label: {
             Text("ĐĂNG NHẬP")
                 .font(.system(size: 14, weight: .semibold))
@@ -156,9 +175,10 @@ private extension Login {
                 .padding(.vertical, 14)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .background(Color.red)
+                .background( password.isEmpty ? Color.gray : Color.red)
                 .cornerRadius(4)
         }
+        .disabled(password.isEmpty)
     }
     
     var faceIdButton: some View {
@@ -171,7 +191,7 @@ private extension Login {
                 .background(.red)
                 .cornerRadius(12)
                 .foregroundStyle(.white)
-                
+            
         }
     }
     
