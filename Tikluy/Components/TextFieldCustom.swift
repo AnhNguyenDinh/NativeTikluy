@@ -38,24 +38,26 @@ struct TextFieldCustom<RightContent: View>: View {
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.gray)
                 ZStack(alignment: .trailing) {
-                    HStack {
+                    HStack(spacing:0) {
                         if let icon = icon {
                             Image(systemName:icon)
-                                .frame(width: 30, height: 30, alignment: Alignment.center)
-    //                            .foregroundColor(.gray)
+                                .frame(width: 34, height: 34, alignment: Alignment.center)
+//                                .background(.gray)
                         }
                         
-                        VStack{
+                        VStack (spacing:0){
                             if !isSecure {
                                 TextField(placeholder, text: $text)
                                     .focused($focusState)
-                                    .font(.system(size: 14, weight: .medium))
+                                    .frame(height:34)
+//                                    .background(.red)
                                     
                             }
                             else{
                                 SecureField(placeholder,text: $text)
                                     .focused($focusState)
-                                    .font(.system(size: 14, weight: .medium))
+                                    .frame(height:34)
+//                                    .background(.red)
                             }
                             Rectangle()
                                 .fill(focusState ? Color.black : Color.gray)
@@ -64,7 +66,7 @@ struct TextFieldCustom<RightContent: View>: View {
                            
                     }
                     if let rightView = rightView {
-                        rightView.offset(x: -10, y: -10)
+                        rightView.offset(x: -10, y: -5)
 //                            .zIndex(20)
                     }
                 }

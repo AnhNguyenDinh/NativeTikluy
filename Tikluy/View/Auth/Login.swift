@@ -30,6 +30,7 @@ struct Login: View {
                         }
                         .padding(.top, safeAreaTop)
                     }
+                    .background(Color.clear)
                     ModalFullView(isPresented: $isShowWarning,description: warningText)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -44,6 +45,7 @@ struct Login: View {
             }
         }
         .navigationBarHidden(true)
+        .toolbar(.hidden)
     }
     
 }
@@ -146,7 +148,7 @@ private extension Login {
         HStack {
             Spacer()
             Button {
-                //                navigateRegister.toggle()
+                       navigateRegister.toggle()
                 // Forgot password action
             } label: {
                 Text("Quên mật khẩu?")
