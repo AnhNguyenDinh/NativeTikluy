@@ -8,32 +8,46 @@
 import SwiftUI
 
 struct MainNavigationStack: View {
+    init() {
+           let appearance = UITabBarAppearance()
+           appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+           UITabBar.appearance().standardAppearance = appearance
+           UITabBar.appearance().scrollEdgeAppearance = appearance
+       }
     var body: some View {
-        TabView{
-            Home()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
+        NavigationStack{
+                TabView{
+                    Home()
+                        .tabItem {
+                            Image(systemName: "house")
+                            Text("Trang chủ")
+                        }
+                    Home()
+                        .tabItem {
+                            Image(systemName: "person.2.fill")
+                            Text("Đại lý")
+                        }
+                    Home()
+                        .tabItem {
+                            Image(systemName: "bell.fill")
+                            Text("Thông báo")
+                        }
+                    Home()
+                        .tabItem {
+                            Image(systemName: "square.grid.2x2")
+                            Text("Mở rộng")
+                        }
                 }
-            Home()
-                .tabItem {
-                    Image(systemName: "person.2.fill")
-                    Text("Đại lý")
-                }
-            Home()
-                .tabItem {
-                    Image(systemName: "bell.fill")
-                    Text("Thông báo")
-                }
-            Home()
-                .tabItem {
-                    Image(systemName: "square.grid.2x2")
-                    Text("Mở rộng")
-                }
+//                .frame(width:.infinity,height: 80)
+                .tabViewStyle(.automatic)
+                .accentColor(.red)
+//                .cornerRadius(10)
+            
+            
         }
-//        .frame(width: 300, height: 400)
-        .tabViewStyle(.automatic)
-        .accentColor(.red)
+        .navigationBarHidden(true)
+        .toolbar(.hidden)
     }
 }
 

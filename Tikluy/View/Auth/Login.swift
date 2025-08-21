@@ -13,6 +13,7 @@ struct Login: View {
     @State private var warningText : String = ""
     @State private var isShowPassWord : Bool = false
     @State private var isSecure : Bool = false
+    
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -41,6 +42,7 @@ struct Login: View {
                 )
                 .ignoresSafeArea()
                 NavigationLink("",destination: ProcedureRegister(), isActive: $navigateRegister).hidden()
+                NavigationLink("",destination: MainNavigationStack(), isActive: $isLoginSuccess).hidden()
                 
             }
         }
@@ -163,13 +165,15 @@ private extension Login {
     var loginButton: some View {
         
         Button {
-            if username == "0357628024" || password == "123456" {
-                print("Đăng nhập \(username) \(password)")
-            }
-            else{
-                warningText = "Sai tài khoản hoặc mật khẩu"
-                isShowWarning.toggle()
-            }
+            isLoginSuccess = true
+//            if username == "0357628024" || password == "123456" {
+//                print("Đăng nhập \(username) \(password)")
+//                isLoginSuccess = true
+//            }
+//            else{
+//                warningText = "Sai tài khoản hoặc mật khẩu"
+//                isShowWarning.toggle()
+//            }
         } label: {
             Text("ĐĂNG NHẬP")
                 .font(.system(size: 14, weight: .semibold))
@@ -177,10 +181,10 @@ private extension Login {
                 .padding(.vertical, 14)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .background( password.isEmpty ? Color.gray : Color.red)
+                .background( Color.red)
                 .cornerRadius(4)
         }
-        .disabled(password.isEmpty)
+//        .disabled(password.isEmpty)
     }
     
     var faceIdButton: some View {
